@@ -1,31 +1,31 @@
-const express = require("express");
-const http = require("http");
-const { Server } = require("socket.io");
+const express = require('express');
+const http = require('http');
+const socketIo = require('socket.io');
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server, {
+const io = socketIo(server, {
     cors: {
-        origin: "*",
-    },
+        origin: '*', // Permettre toutes les origines pour les tests
+        methods: ["GET", "POST"]
+    }
 });
 
-app.get("/", (req, res) => {
-    res.send("Serveur de chat en temps réel");
-});
+io.on('connection', (socket) => {
+    console.log('Un utilisateur est connecté');
 
-io.on("connection", (socket) => {
-    console.log("Nouvel utilisateur connecté");
-
-    // Réception et diffusion des messages
-    socket.on("chatMessage", (msg) => {
-        io.emit("message", msg);
+    socket.on('chat message', (msg) => {
+        io.emit('chat message', msg); // Émettre le message à tous les clients
     });
 
-    socket.on("disconnect", () => {
-        console.log("Utilisateur déconnecté");
+    socket.on('disconnect', () => {
+        console.log('Un utilisateur est déconnecté');
     });
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+// Écoute sur le port 10000
+const PORT = process.env.PORT || 10000;
+server.listen(PORT, () => {
+    console.log(`Le serveur est en écoute sur le port ${PORT}`);
+});
+ORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
