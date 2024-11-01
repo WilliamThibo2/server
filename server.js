@@ -11,6 +11,7 @@ const io = socketIo(server, {
     }
 });
 
+// Événements Socket.IO
 io.on('connection', (socket) => {
     console.log('Un utilisateur est connecté');
 
@@ -26,6 +27,5 @@ io.on('connection', (socket) => {
 // Écoute sur le port 10000
 const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
-    console.log(`Le serveur est en écoute sur le port ${PORT}`);
+    console.log(`Serveur démarré sur le port ${PORT}`);
 });
-) => console.log(`Serveur démarré sur le port ${PORT}`));
