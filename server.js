@@ -28,4 +28,4 @@ const PORT = process.env.PORT || 10000;
 server.listen(PORT, () => {
     console.log(`Le serveur est en écoute sur le port ${PORT}`);
 });
-ORT, () => console.log(`Serveur démarré sur le port ${PORT}`));
+) => console.log(`Serveur démarré sur le port ${PORT}`));
